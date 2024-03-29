@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script src="/src/index.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="left">
+      <div id="listTitle" class="title"><h2>Lists</h2></div>
+      <div id="listField" class="list">
+        <ul>
+          <li><span>Today</span><span id="listDescription">...</span></li>
+          <li><span>in Week</span><span id="listDescription">...</span></li>
+        </ul>
+      </div>
+      <div class="buttonsBox">
+        <button id="deleteList" class="roundButton">&#65293;</button>
+        <button id="modalAddListBtn" class="roundButton">&#65291;</button>
+      </div>
+    </section>
+
+    <section class="right">
+      <div id="taskTitle" class="title"><h2>Today</h2></div>
+      <div id="taskField" class="task">
+        <ul>
+          <li>
+            <span>Drink water</span>
+            <div class="splitter">
+              <span id="taskDueDate">01 / 02 / 2024</span
+              ><span id="taskDescription">...</span>
+            </div>
+          </li>
+          <li>
+            <span>Eat vegetable</span>
+            <div class="splitter">
+              <span id="taskDueDate">01 / 02 / 2024</span
+              ><span id="taskDescription">...</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="buttonsBox">
+        <button id="deleteTask" class="roundButton">&#65293;</button>
+        <button id="addTask" class="roundButton">&#65291;</button>
+      </div>
+    </section>
+
+    <dialog id="modal">
+      <div class="newTask">New List</div>
+      <div class="formQuestion">List name:</div>
+      <input type="text" id="listName" />
+      <div class="formQuestion">List description:</div>
+      <input type="text" id="listDescritpion" />
+      <div class="buttonsBox">
+        <button id="addListBtn">&#65291;</button>
+        <button id="backBtn"><<</button>
+      </div>
+    </dialog>
+  </body>
+</html>

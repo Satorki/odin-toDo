@@ -1,0 +1,102 @@
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+body {
+  margin: 0;
+  background-color: #123456;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  height: 100vh;
+  gap: 20px;
+}
+
+.left {
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-rows: 1fr 14fr;
+  gap: 20px;
+}
+
+.title {
+  grid-row: 1 / 2;
+}
+.list,
+.task {
+  grid-row: 2 / 3;
+}
+
+h2 {
+  font-size: 2rem;
+  padding: 10px 20px 0 20px;
+}
+
+#listTitle {
+  border: 1px solid #000;
+  border-top-right-radius: 20px;
+  text-align: end;
+}
+
+#listField {
+  border: 1px solid #000;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.list ul li,
+.task ul li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 1.2rem;
+
+  padding: 5px 10px;
+  background-color: green;
+}
+.list ul li {
+  margin: 20px 0 20px 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.task ul li {
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.right {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-rows: 1fr 14fr;
+  gap: 20px;
+}
+
+#taskTitle {
+  border: 1px solid #000;
+  border-top-left-radius: 20px;
+}
+#taskField {
+  border: 1px solid #000;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+button {
+  padding: 5px 12px;
+  font-size: 2.5rem;
+  border-radius: 100px;
+  background-color: goldenrod;
+  margin: 10px;
+}
+
+dialog {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: brown;
+  display: flex;
+  flex-direction: column;
+}
