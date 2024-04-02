@@ -35,36 +35,58 @@ class TaskFactory {
 }
 
 //TESTS
-const today = new List("Today", "to do today");
+// const today = new List("Today", "to do today");
 
-const taskFactory = new TaskFactory();
+// const taskFactory = new TaskFactory();
 
-const doAMathForSchool = taskFactory.create("do zupa", "zupa good");
+// const doAMathForSchool = taskFactory.create("do zupa", "zupa good");
 
-today.addTask(doAMathForSchool);
+// today.addTask(doAMathForSchool);
 
-console.log(today.showTasks());
+// console.log(today.showTasks());
 
-const modalAddListBtn = document.querySelector("#modalAddListBtn");
-const addListBtn = document.querySelector("#addListBtn");
-const backBtn = document.querySelector("#backBtn");
-const listField = document.querySelector("#listField");
-const dialog = document.getElementById("modal");
+function ModalList() {
+  const selectors = {
+    modalAddListBtn: document.querySelector("#modalAddListBtn"),
+    addListBtn: document.querySelector("#addListBtn"),
+    backBtn: document.querySelector("#backBtn"),
+    listField: document.querySelector("#listField"),
+    dialog: document.querySelector("dialog"),
+  };
+  function showModal() {
+    selectors.modalAddListBtn.addEventListener("click", () => {
+      selectors.dialog.showModal();
+    });
+  }
+  function closeModal() {
+    selectors.backBtn.addEventListener("click", () => {
+      selectors.dialog.close();
+    });
+  }
 
-modalAddListBtn.addEventListener("click", () => {
-  dialog.showModal();
-});
+  return { showModal, closeModal };
+}
 
-addListBtn.addEventListener("click", () => {
-  const listNameInput = document.querySelector("#listName").value;
-  const listDescriptionInput = document.querySelector("#listDescritpion").value;
+const modal = ModalList();
+modal.showModal();
+modal.closeModal();
 
-  const list = new List(listNameInput, listDescriptionInput);
+// const modalAddListBtn = document.querySelector("#modalAddListBtn");
+// const addListBtn = document.querySelector("#addListBtn");
+// const backBtn = document.querySelector("#backBtn");
+// const listField = document.querySelector("#listField");
+// const dialog = document.querySelector("dialog");
 
-  const listPara = document.createElement("p");
-  listPara.textContent = list.title;
+// addListBtn.addEventListener("click", () => {
+//   const listNameInput = document.querySelector("#listName").value;
+//   const listDescriptionInput = document.querySelector("#listDescritpion").value;
 
-  listField.appendChild(listPara);
+//   const list = new List(listNameInput, listDescriptionInput);
 
-  dialog.close();
-});
+//   const listPara = document.createElement("p");
+//   listPara.textContent = list.title;
+
+//   listField.appendChild(listPara);
+
+//   dialog.close();
+// });
