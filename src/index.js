@@ -1,4 +1,4 @@
-//TWORZYMY LISTE
+//LIST CREATE
 class List {
   taskList = [];
   constructor(title, description) {
@@ -13,7 +13,7 @@ class List {
   }
 }
 
-//TWORZYMY ZADANIE
+//TASK CREATE
 class Task {
   constructor(id, name, description, date, priority) {
     this.id = id;
@@ -45,7 +45,7 @@ class TaskFactory {
 
 // console.log(today.showTasks());
 
-//WYŚWIETLAMY MODAL
+//MODAL SHOW
 function ModalList() {
   const selectors = {
     modalAddListBtn: document.querySelector("#modalAddListBtn"),
@@ -70,33 +70,7 @@ const modal = ModalList();
 modal.showModal();
 modal.closeModal();
 
-//WYŚWITLAMY LISTE
-/* <section class="left">
-  <div id="listTitle" class="title">
-    <h2>Lists</h2>
-  </div>
-  <div id="listField" class="list">
-    <ul>
-      <li>
-        <span>Today</span>
-        <span id="listDescriptionBtn">...</span>
-      </li>
-      <li>
-        <span>in Week</span>
-        <span id="listDescriptionBtn">...</span>
-      </li>
-    </ul>
-  </div>
-  <div class="buttonsBox">
-    <button type="button" id="deleteList" class="roundButton">
-      &#65293;
-    </button>
-    <button type="button" id="modalAddListBtn" class="roundButton">
-      &#65291;
-    </button>
-  </div>
-</section>; */
-
+//LIST SHOW
 function ListAdd() {
   const selectors = {
     addListBtn: document.querySelector("#addListBtn"),
