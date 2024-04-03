@@ -45,12 +45,12 @@ class TaskFactory {
 
 // console.log(today.showTasks());
 
+//WYŚWIETLAMY MODAL
 function ModalList() {
   const selectors = {
     modalAddListBtn: document.querySelector("#modalAddListBtn"),
     addListBtn: document.querySelector("#addListBtn"),
     backBtn: document.querySelector("#backBtn"),
-    listField: document.querySelector("#listField"),
     dialog: document.querySelector("dialog"),
   };
   function showModal() {
@@ -66,27 +66,86 @@ function ModalList() {
 
   return { showModal, closeModal };
 }
-
 const modal = ModalList();
 modal.showModal();
 modal.closeModal();
 
-// const modalAddListBtn = document.querySelector("#modalAddListBtn");
-// const addListBtn = document.querySelector("#addListBtn");
-// const backBtn = document.querySelector("#backBtn");
-// const listField = document.querySelector("#listField");
-// const dialog = document.querySelector("dialog");
+//WYŚWITLAMY LISTE
+/* <section class="left">
+  <div id="listTitle" class="title">
+    <h2>Lists</h2>
+  </div>
+  <div id="listField" class="list">
+    <ul>
+      <li>
+        <span>Today</span>
+        <span id="listDescriptionBtn">...</span>
+      </li>
+      <li>
+        <span>in Week</span>
+        <span id="listDescriptionBtn">...</span>
+      </li>
+    </ul>
+  </div>
+  <div class="buttonsBox">
+    <button type="button" id="deleteList" class="roundButton">
+      &#65293;
+    </button>
+    <button type="button" id="modalAddListBtn" class="roundButton">
+      &#65291;
+    </button>
+  </div>
+</section>; */
 
-// addListBtn.addEventListener("click", () => {
-//   const listNameInput = document.querySelector("#listName").value;
-//   const listDescriptionInput = document.querySelector("#listDescritpion").value;
+function ListAdd() {
+  const selectors = {
+    addListBtn: document.querySelector("#addListBtn"),
+    listField: document.querySelector("#listField ul"),
+    listName: document.querySelector("#listName"),
+    listDescription: document.querySelector("#listDescription"),
+    backBtn: document.querySelector("#backBtn"),
+  };
+  let completedList = [];
 
-//   const list = new List(listNameInput, listDescriptionInput);
+  function createList() {
+    return new List(selectors.listName.value, selectors.listDescription.value);
+  }
+  function saveList() {
+    completedList.push(createList());
+    return completedList;
+  }
+  function addList() {
+    selectors.addListBtn.addEventListener("click", () => {
+      saveList();
+    });
+  }
+  function generateList() {
+    selectors.listField.textContent = "";
+    completedList.forEach((element) => {
+      const listElementsAdd = {
+        li: document.createElement("li"),
+        span1: document.createElement("span"),
+        span2: document.createElement("span"),
+      };
 
-//   const listPara = document.createElement("p");
-//   listPara.textContent = list.title;
+      listElementsAdd.span1.textContent = element.title;
+      listElementsAdd.span2.textContent = element.description;
+      listElementsAdd.span2.classList.add("listDescriptionBtn");
 
-//   listField.appendChild(listPara);
+      selectors.listField.appendChild(listElementsAdd.li);
+      listElementsAdd.li.appendChild(listElementsAdd.span1);
+      listElementsAdd.li.appendChild(listElementsAdd.span2);
+    });
+  }
+  function showList() {
+    selectors.backBtn.addEventListener("click", () => {
+      generateList();
+    });
+  }
 
-//   dialog.close();
-// });
+  return { createList, addList, showList };
+}
+const mainList = ListAdd();
+mainList.createList();
+mainList.addList();
+mainList.showList();
