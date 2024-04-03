@@ -69,13 +69,18 @@ h2 {
   color: #fff;
 }
 .list ul li.listDescription {
+  display: none;
   margin-top: 0;
   background-color: #ecfeff;
   color: #000;
 }
-.task ul li {
-  margin: 20px;
-  border-radius: 20px;
+
+.deleteList {
+  display: none;
+}
+.deleteList:hover {
+  color: #ff0000;
+  cursor: pointer;
 }
 
 /* TASKS */
@@ -84,6 +89,10 @@ h2 {
   display: grid;
   grid-template-rows: 1fr 14fr;
   gap: 20px;
+}
+.task ul li {
+  margin: 20px;
+  border-radius: 20px;
 }
 
 #taskTitle {
