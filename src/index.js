@@ -76,7 +76,7 @@ function ListAdd() {
     addListBtn: document.querySelector("#addListBtn"),
     listField: document.querySelector("#listField ul"),
     listName: document.querySelector("#listName"),
-    listDescription: document.querySelector("#listDescription"),
+    listDescription: document.querySelector("#listDescriptionArea"),
     backBtn: document.querySelector("#backBtn"),
   };
   let completedList = [];
@@ -95,20 +95,26 @@ function ListAdd() {
   }
   function generateList() {
     selectors.listField.textContent = "";
-    completedList.forEach((element) => {
+    completedList.forEach((element, index) => {
       const listElementsAdd = {
-        li: document.createElement("li"),
+        li1: document.createElement("li"),
+        li2: document.createElement("li"),
         span1: document.createElement("span"),
         span2: document.createElement("span"),
       };
 
       listElementsAdd.span1.textContent = element.title;
-      listElementsAdd.span2.textContent = element.description;
-      listElementsAdd.span2.classList.add("listDescriptionBtn");
+      listElementsAdd.span2.textContent = " ...";
+      listElementsAdd.span2.setAttribute("id", "listDescriptionBtn" + index);
+      listElementsAdd.span2.classList.add("spanLink");
+      listElementsAdd.li2.textContent = element.description;
+      listElementsAdd.li2.setAttribute("id", "listDescription" + index);
+      listElementsAdd.li2.classList.add("listDescription");
 
-      selectors.listField.appendChild(listElementsAdd.li);
-      listElementsAdd.li.appendChild(listElementsAdd.span1);
-      listElementsAdd.li.appendChild(listElementsAdd.span2);
+      selectors.listField.appendChild(listElementsAdd.li1);
+      listElementsAdd.li1.appendChild(listElementsAdd.span1);
+      listElementsAdd.li1.appendChild(listElementsAdd.span2);
+      selectors.listField.appendChild(listElementsAdd.li2);
     });
   }
   function showList() {
@@ -123,3 +129,16 @@ const mainList = ListAdd();
 mainList.createList();
 mainList.addList();
 mainList.showList();
+
+// DESCRIPTION SHOW
+function DescriptionShow() {
+  const selectors = {
+    btn: document.querySelector("#listDescriptionBtn0"),
+    description: document.querySelector("#listDescription0"),
+  };
+  selectors.btn.addEventListener("click", () => {
+    selectors.description.style.display = "none"
+  });
+}
+
+DescriptionShow();

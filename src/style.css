@@ -59,16 +59,19 @@ h2 {
   justify-content: space-between;
   list-style: none;
   font-size: 1.2rem;
-
   padding: 5px 10px;
-  background-color: green;
 }
 .list ul li {
-  margin: 20px 0 20px 20px;
+  margin: 20px 0 0 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   background-color: #0e7490;
   color: #fff;
+}
+.list ul li.listDescription {
+  margin-top: 0;
+  background-color: #ecfeff;
+  color: #000;
 }
 .task ul li {
   margin: 20px;
@@ -160,7 +163,7 @@ input {
   background-color: #cffafe;
   border-radius: 20px;
 }
-#listDescription {
+#listDescriptionArea {
   background-color: #ecfeff;
   font-size: 1rem;
   padding: 4px;
