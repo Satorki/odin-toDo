@@ -170,6 +170,7 @@ function ListBehaviours() {
   function toggleDeleteList() {
     let temp = 0;
     selectors.deleteListBtn.addEventListener("click", () => {
+      console.table(completedList);
       if (temp === 0) {
         document.querySelectorAll(".deleteList").forEach((element) => {
           element.style.display = "block";
@@ -184,13 +185,18 @@ function ListBehaviours() {
     });
   }
 
-  // function deleteList() {
-  //   document.querySelectorAll(".deleteList").forEach((deleteButton, index) => {
-  //     deleteButton.addEventListener("click", () => {
-  //       completedList.splice(index, 1);
-  //     });
-  //   });
-  // }
+  function deleteList() {
+    document.querySelectorAll(".deleteList").forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        completedList.splice(index, 1);
+        generateList();
+        document.querySelectorAll(".deleteList").forEach((element) => {
+          element.style.display = "block";
+        });
+        deleteList();
+      });
+    });
+  }
 
   function showList() {
     selectors.backBtnList.addEventListener("click", () => {
@@ -198,7 +204,7 @@ function ListBehaviours() {
       toggleDescriptionShow();
       pickUpList();
       toggleDeleteList();
-      //deleteList();
+      deleteList();
     });
   }
 
@@ -210,18 +216,64 @@ mainList.createList();
 mainList.addList();
 mainList.showList();
 
+/////////////////////////////////////////////////
 
 function TaskBehaviours() {
   const selectors = {
-    priorityButtons: document.querySelectorAll(".priorityButtons button")
+    taskName: document.querySelector("#taskName"),
+    taskDescription: document.querySelector("#taskDescription"),
+    taskDueDate: document.querySelector("#taskDueDateInput"),
+    priorityButtons: document.querySelectorAll(".priorityButtons button"),
+    addTaskBtn: document.querySelector("#addTaskBtn"),
+    backBtnTask: document.querySelector("#backBtnTask"),
+  };
+
+  function createTask() {
+    return ids.taskWithId(
+      selectors.taskName.value,
+      selectors.taskDescription.value,
+      selectors.taskDueDate.value,
+      poriorityChosed
+    );
   }
 
-  selectors.priorityButtons.forEach((element)  => {
-    element.addEventListener("click", () => {
-      selectors.priorityButtons.forEach(button => button.style.color = "white");
-      element.style.color = "red"; 
-    })
-  })
+  const taskList = [];
+  function addTask() {
+    selectors.addTaskBtn.addEventListener("click", () => {
+      taskList.push;
+    });
+  }
+  // function saveList() {
+  //   completedList.push(createList());
+  //   return completedList;
+  // }
+  // function addList() {
+  //   selectors.addListBtn.addEventListener("click", () => {
+  //     saveList();
+  //     generateList();
+  //     toggleDescriptionShow();
+  //     pickUpList();
+  //     toggleDeleteList();
+  //   });
+  // }
+
+  let poriorityChosed;
+  function poriorityCheck() {
+    selectors.priorityButtons.forEach((element) => {
+      element.addEventListener("click", () => {
+        selectors.priorityButtons.forEach(
+          (button) => (button.style.color = "white")
+        );
+        element.style.color = "red";
+        poriorityChosed = element.textContent;
+      });
+    });
+    return poriorityChosed;
+  }
+
+  return { poriorityCheck, addTask };
 }
 
-TaskBehaviours();
+const mainTasks = TaskBehaviours();
+mainTasks.poriorityCheck();
+mainTasks.addTask();
