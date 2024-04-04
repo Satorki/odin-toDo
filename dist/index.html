@@ -17,7 +17,7 @@
             <span class="spanLink" id="listTitle">Today</span>
             <span class="spanLink" id="listDescriptionBtn">...</span>
           </li>
-          <li class="listDescription" id="listDescription">
+          <li class="description" id="listDescription">
             Nothing to explain
           </li>
           <li>
@@ -40,16 +40,28 @@
       <div class="title" id="listTitleMain"><h2>Today</h2></div>
       <div id="taskField" class="task">
         <ul>
+
+
           <li>
-            <span>
-              <span class="spanLink">&#10004; </span
-              ><span>Drink water</span></span
-            >
-            <div class="splitter">
-              <span id="taskDueDate">01 / 02 / 2024 </span
-              ><span class="spanLink" id="taskDescriptionBtn"> ...</span>
+
+            <div>
+              <span class="deleteTask">✗</span>
+              <span class="spanLink" id="checkTask">&#10004; </span>
+              <span>Drink water</span>
             </div>
+
+            <div>
+              <span id="taskDueDate">01 / 02 / 2024 </span>
+              <span class="spanLink" id="taskDescriptionBtn"> ...</span>
+            </div>
+
           </li>
+
+          <li class="description" id="taskDescription">
+            Nothing to explain
+          </li>
+
+
           <li>
             <span>
               <span class="spanLink">&#10004; </span
@@ -69,8 +81,8 @@
     </section>
 
     <dialog id="modalList" class="modal">
+      <div class="newTitle"><h3>New List</h3></div>
       <div class="modalBackground">
-        <div class="newTitle"><h3>New List</h3></div>
         <div class="formQuestion">List name:</div>
         <input type="text" id="listName" />
         <div class="formQuestion">List description:</div>
@@ -83,12 +95,12 @@
     </dialog>
 
     <dialog id="modalTask" class="modal">
+      <div class="newTitle"><h3>New Task</h3></div>
       <div class="modalBackground">
-        <div class="newTitle"><h3>New Task</h3></div>
         <div class="formQuestion">Task name:</div>
         <input type="text" id="taskName" />
         <div class="formQuestion">Notes:</div>
-        <input type="text" id="taskDescription" />
+        <input type="text" id="taskDescriptionInput" />
         <div class="formQuestion">Task due date:</div>
         <input type="date" id="taskDueDateInput" />
         <div class="formQuestion">Priority</div>

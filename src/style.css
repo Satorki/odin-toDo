@@ -14,7 +14,6 @@ body {
   height: 100vh;
   gap: 20px;
   background-color: #083344;
-  font-weight: bold;
 }
 /* LISTS */
 .left {
@@ -69,7 +68,7 @@ h2 {
   background-color: #0e7490;
   color: #fff;
 }
-.list ul li.listDescription {
+.list ul li.description {
   display: none;
   margin-top: 0;
   background-color: #ecfeff;
@@ -92,7 +91,7 @@ h2 {
   gap: 20px;
 }
 .task ul li {
-  margin: 20px;
+  margin: 20px 20px 0 20px;
   border-radius: 20px;
 }
 
@@ -115,8 +114,23 @@ h2 {
   background-color: #164e63;
 }
 .done {
-  opacity: 0.7;
+  opacity: 0.6;
   text-decoration: line-through;
+}
+
+.task ul li.description {
+  display: none;
+  margin-top: 0;
+  background-color: #ecfeff;
+  color: #000;
+}
+
+.deleteTask {
+  display: none;
+}
+.deleteTask:hover {
+  color: #ff0000;
+  cursor: pointer;
 }
 
 /* BUTTONS */
