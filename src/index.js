@@ -43,10 +43,9 @@ function IdGenerator() {
 }
 
 //MODAL SHOW
-function ModalList() {
+function Modal() {
   const selectors = {
     modalAddListBtn: document.querySelector("#modalAddListBtn"),
-    addListBtn: document.querySelector("#addListBtn"),
     backBtn: document.querySelector("#backBtn"),
     dialog: document.querySelector("dialog"),
   };
@@ -63,23 +62,26 @@ function ModalList() {
 
   return { showModal, closeModal };
 }
-const modal = ModalList();
-modal.showModal();
-modal.closeModal();
+const modalList = Modal();
+modalList.showModal();
+modalList.closeModal();
+
+const modalTask = Modal();
+
 
 const ids = IdGenerator();
 
 //LIST SHOW
 function ListBehaviours() {
   const selectors = {
+    deleteListBtn: document.querySelector("#deleteListBtn"),
     addListBtn: document.querySelector("#addListBtn"),
     listField: document.querySelector("#listField ul"),
     listName: document.querySelector("#listName"),
     listDescription: document.querySelector("#listDescriptionArea"),
     backBtn: document.querySelector("#backBtn"),
-    listTitleMain: document.querySelector("#listTitleMain"),
   };
-  let completedList = [];
+  const completedList = [];
 
   function createList() {
     return ids.listWithId(
@@ -91,6 +93,12 @@ function ListBehaviours() {
     completedList.push(createList());
     return completedList;
   }
+  function addList() {
+    selectors.addListBtn.addEventListener("click", () => {
+      saveList();
+    });
+  }
+
   function generateList() {
     selectors.listField.textContent = "";
     completedList.forEach((element) => {
@@ -105,6 +113,7 @@ function ListBehaviours() {
       listElementsAdd.span1.classList.add("deleteList");
       listElementsAdd.span2.textContent = element.title;
       listElementsAdd.span2.classList.add("spanLink");
+      listElementsAdd.span2.setAttribute("id", "listTitle");
       listElementsAdd.span3.textContent = " ...";
       listElementsAdd.span3.setAttribute("id", "listDescriptionBtn");
       listElementsAdd.span3.classList.add("spanLink");
@@ -119,72 +128,76 @@ function ListBehaviours() {
       selectors.listField.appendChild(listElementsAdd.li2);
     });
   }
-  function addList() {
-    selectors.addListBtn.addEventListener("click", () => {
-      saveList();
-    });
-  }
-  function showList() {
-    selectors.backBtn.addEventListener("click", () => {
-      generateList();
-      descriptionShow();
-    });
-  }
-  // function deleteList() {
-  //   document.querySelectorAll(".deleteList").forEach((element, index) => {
-  //     element.addEventListener("click", () => {
-  //       completedList.splice(index, 1);
-  //       console.table(completedList);
-  //       generateList();
-  //     });
-  //   });
-  // }
-  const titleH2 = document.createElement("h2");
-  function chooseList() {
+
+  function pickUpList() {
+    const listTitleMain = document.querySelector("#listTitleMain");
+    const titleH2 = document.createElement("h2");
     document.querySelectorAll("#listTitle").forEach((element) => {
       element.addEventListener("click", () => {
-        console.log(element.textContent);
-        selectors.listTitleMain.appendChild(titleH2);
+        listTitleMain.textContent = "";
+        listTitleMain.appendChild(titleH2);
         titleH2.textContent = element.textContent;
       });
     });
   }
 
-  return { createList, addList, showList, completedList, chooseList };
+  function toggleDescriptionShow() {
+    document.querySelectorAll("#listDescriptionBtn").forEach((element) => {
+      element.addEventListener("click", () => {
+        if (
+          element.closest("li").nextElementSibling.style.display === "block"
+        ) {
+          element.closest("li").nextElementSibling.style.display = "none";
+        } else {
+          element.closest("li").nextElementSibling.style.display = "block";
+        }
+      });
+    });
+  }
+
+  function toggleDeleteList() {
+    let temp = 0;
+    selectors.deleteListBtn.addEventListener("click", () => {
+      if (temp === 0) {
+        document.querySelectorAll(".deleteList").forEach((element) => {
+          element.style.display = "block";
+        });
+        temp = 1;
+      } else {
+        document.querySelectorAll(".deleteList").forEach((element) => {
+          element.style.display = "none";
+        });
+        temp = 0;
+      }
+    });
+  }
+
+  function deleteList() {
+    document.querySelectorAll(".deleteList").forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        completedList.splice(index, 1); // Usunięcie z listy completedList
+        generateList(); // Ponowne wygenerowanie listy bez usuniętego elementu
+        toggleDescriptionShow(); // Aktualizacja pokazywania opisu
+        pickUpList(); // Aktualizacja wyboru listy
+        toggleDeleteList(); // Aktualizacja pokazywania przycisków usuwania
+      });
+    });
+  }
+
+  function showList() {
+    selectors.backBtn.addEventListener("click", () => {
+      generateList();
+      toggleDescriptionShow();
+      pickUpList();
+      toggleDeleteList();
+      deleteList();
+    });
+  }
+
+  return { createList, addList, showList };
 }
 
 const mainList = ListBehaviours();
 mainList.createList();
 mainList.addList();
 mainList.showList();
-mainList.chooseList();
-
-// mainList.deleteList();
-
-// DESCRIPTION SHOW
-function descriptionShow() {
-  document.querySelectorAll("#listDescriptionBtn").forEach((element) => {
-    element.addEventListener("click", () => {
-      if (element.closest("li").nextElementSibling.style.display === "block") {
-        element.closest("li").nextElementSibling.style.display = "none";
-      } else {
-        element.closest("li").nextElementSibling.style.display = "block";
-      }
-    });
-  });
-}
-
-let temp = 1;
-document.querySelector("#deleteListBtn").addEventListener("click", () => {
-  if (temp === 0) {
-    document.querySelectorAll(".deleteList").forEach((element) => {
-      element.style.display = "none";
-    });
-    temp = 1;
-  } else {
-    document.querySelectorAll(".deleteList").forEach((element) => {
-      element.style.display = "block";
-    });
-    temp = 0;
-  }
-});
