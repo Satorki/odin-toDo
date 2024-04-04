@@ -68,7 +68,6 @@ modalList.closeModal();
 
 const modalTask = Modal();
 
-
 const ids = IdGenerator();
 
 //LIST SHOW
@@ -172,17 +171,13 @@ function ListBehaviours() {
     });
   }
 
-  function deleteList() {
-    document.querySelectorAll(".deleteList").forEach((deleteButton, index) => {
-      deleteButton.addEventListener("click", () => {
-        completedList.splice(index, 1); // Usunięcie z listy completedList
-        generateList(); // Ponowne wygenerowanie listy bez usuniętego elementu
-        toggleDescriptionShow(); // Aktualizacja pokazywania opisu
-        pickUpList(); // Aktualizacja wyboru listy
-        toggleDeleteList(); // Aktualizacja pokazywania przycisków usuwania
-      });
-    });
-  }
+  // function deleteList() {
+  //   document.querySelectorAll(".deleteList").forEach((deleteButton, index) => {
+  //     deleteButton.addEventListener("click", () => {
+  //       completedList.splice(index, 1);
+  //     });
+  //   });
+  // }
 
   function showList() {
     selectors.backBtn.addEventListener("click", () => {
@@ -190,7 +185,7 @@ function ListBehaviours() {
       toggleDescriptionShow();
       pickUpList();
       toggleDeleteList();
-      deleteList();
+      //deleteList();
     });
   }
 
