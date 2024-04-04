@@ -45,28 +45,37 @@ function IdGenerator() {
 //MODAL SHOW
 function Modal() {
   const selectors = {
+    modalAddTaskBtn: document.querySelector("#modalAddTaskBtn"),
     modalAddListBtn: document.querySelector("#modalAddListBtn"),
-    backBtn: document.querySelector("#backBtn"),
+    backBtnList: document.querySelector("#backBtnList"),
+    backBtnTask: document.querySelector("#backBtnTask"),
     dialog: document.querySelector("dialog"),
+    modalList: document.querySelector("#modalList"),
+    modalTask: document.querySelector("#modalTask"),
   };
   function showModal() {
-    selectors.modalAddListBtn.addEventListener("click", () => {
-      selectors.dialog.showModal();
+    document.addEventListener("click", (e) => {
+      if (e.target === selectors.modalAddListBtn) {
+        selectors.modalList.showModal();
+      } else if (e.target === selectors.modalAddTaskBtn) {
+        selectors.modalTask.showModal();
+      }
     });
   }
   function closeModal() {
-    selectors.backBtn.addEventListener("click", () => {
-      selectors.dialog.close();
+    selectors.backBtnList.addEventListener("click", () => {
+      selectors.modalList.close();
+    });
+    selectors.backBtnTask.addEventListener("click", () => {
+      selectors.modalTask.close();
     });
   }
 
   return { showModal, closeModal };
 }
-const modalList = Modal();
-modalList.showModal();
-modalList.closeModal();
-
-const modalTask = Modal();
+const modal = Modal();
+modal.showModal();
+modal.closeModal();
 
 const ids = IdGenerator();
 
@@ -78,7 +87,7 @@ function ListBehaviours() {
     listField: document.querySelector("#listField ul"),
     listName: document.querySelector("#listName"),
     listDescription: document.querySelector("#listDescriptionArea"),
-    backBtn: document.querySelector("#backBtn"),
+    backBtnList: document.querySelector("#backBtnList"),
   };
   const completedList = [];
 
@@ -95,6 +104,10 @@ function ListBehaviours() {
   function addList() {
     selectors.addListBtn.addEventListener("click", () => {
       saveList();
+      generateList();
+      toggleDescriptionShow();
+      pickUpList();
+      toggleDeleteList();
     });
   }
 
@@ -180,7 +193,7 @@ function ListBehaviours() {
   // }
 
   function showList() {
-    selectors.backBtn.addEventListener("click", () => {
+    selectors.backBtnList.addEventListener("click", () => {
       generateList();
       toggleDescriptionShow();
       pickUpList();
@@ -196,3 +209,19 @@ const mainList = ListBehaviours();
 mainList.createList();
 mainList.addList();
 mainList.showList();
+
+
+function TaskBehaviours() {
+  const selectors = {
+    priorityButtons: document.querySelectorAll(".priorityButtons button")
+  }
+
+  selectors.priorityButtons.forEach((element)  => {
+    element.addEventListener("click", () => {
+      selectors.priorityButtons.forEach(button => button.style.color = "white");
+      element.style.color = "red"; 
+    })
+  })
+}
+
+TaskBehaviours();

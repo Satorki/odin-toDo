@@ -63,12 +63,12 @@
         </ul>
       </div>
       <div class="buttonsBox">
-        <button id="deleteTask" class="roundButton">&#65293;</button>
-        <button id="modalAddTask" class="roundButton">&#65291;</button>
+        <button id="deleteTaskBtn" class="roundButton">&#65293;</button>
+        <button id="modalAddTaskBtn" class="roundButton">&#65291;</button>
       </div>
     </section>
 
-    <dialog id="modal">
+    <dialog id="modalList" class="modal">
       <div class="modalBackground">
         <div class="newTitle"><h3>New List</h3></div>
         <div class="formQuestion">List name:</div>
@@ -76,8 +76,30 @@
         <div class="formQuestion">List description:</div>
         <textarea id="listDescriptionArea" rows="6"></textarea>
         <div class="buttonsBox">
-          <button id="backBtn"><<</button>
-          <button id="addListBtn">&#65291;</button>
+          <button id="backBtnList" class="roundButton"><<</button>
+          <button id="addListBtn" class="roundButton">&#65291;</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modalTask" class="modal">
+      <div class="modalBackground">
+        <div class="newTitle"><h3>New Task</h3></div>
+        <div class="formQuestion">Task name:</div>
+        <input type="text" id="taskName" />
+        <div class="formQuestion">Notes:</div>
+        <input type="text" id="taskDescription" />
+        <div class="formQuestion">Task due date:</div>
+        <input type="date" id="taskDueDateInput" />
+        <div class="formQuestion">Priority</div>
+        <div class="priorityButtons">
+          <button class="highPriority">High</button
+          ><button class="mediumPriority">Normal</button
+          ><button class="lowPriority">Low</button>
+        </div>
+        <div class="buttonsBox">
+          <button id="backBtnTask" class="roundButton"><<</button>
+          <button id="addListBtn" class="roundButton">&#65291;</button>
         </div>
       </div>
     </dialog>

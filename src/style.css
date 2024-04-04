@@ -14,6 +14,7 @@ body {
   height: 100vh;
   gap: 20px;
   background-color: #083344;
+  font-weight: bold;
 }
 /* LISTS */
 .left {
@@ -119,7 +120,7 @@ h2 {
 }
 
 /* BUTTONS */
-button {
+.roundButton {
   color: #fff;
   padding: 5px 12px;
   font-size: 2.5rem;
@@ -139,7 +140,7 @@ button:hover {
 }
 
 /* MODAL DIALOG */
-#modal {
+.modal {
   z-index: 3;
   margin: 0 auto;
   top: 25%;
@@ -185,7 +186,33 @@ input {
   border: none;
 }
 
-#modal .buttonsBox {
+.modal .buttonsBox {
   display: flex;
   justify-content: space-between;
+}
+#modalTask .priorityButtons {
+  display: flex;
+  flex-direction: column;
+}
+#modalTask .priorityButtons button {
+  padding: 4px;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+}
+#modalTask .priorityButtons button:hover {
+  color: #7c9159;
+}
+#modalTask .priorityButtons button:active {
+  color: #ff0000;
+}
+
+.highPriority {
+  background-color: #083344;
+}
+.mediumPriority {
+  background-color: #164E63;
+}
+.lowPriority {
+  background-color: #155E75;
 }
