@@ -6,12 +6,6 @@ class List {
     this.title = title;
     this.description = description;
   }
-  addTask(task) {
-    this.taskList.push(task);
-  }
-  showTasks() {
-    return this.taskList;
-  }
 }
 //TASK CREATE
 class Task {
@@ -151,6 +145,9 @@ function ListBehaviours() {
         listTitleMain.textContent = "";
         listTitleMain.appendChild(titleH2);
         titleH2.textContent = element.textContent;
+        const mainTasks = TaskBehaviours();
+        mainTasks.poriorityCheck();
+        mainTasks.addTask();
       });
     });
   }
@@ -229,7 +226,7 @@ function TaskBehaviours() {
           (button) => (button.style.color = "white")
         );
         element.style.color = "red";
-        poriorityChosed = element.textContent;
+        poriorityChosed = window.getComputedStyle(element).backgroundColor;
       });
     });
     return poriorityChosed;
@@ -252,8 +249,14 @@ function TaskBehaviours() {
       doneTask();
       toggleDescriptionShow();
       toggleDeleteTask();
+      deleteTask();
+      generateAllTasks();
     });
     return taskList;
+  }
+
+  function generateAllTasks() {
+    console.log(taskList);
   }
 
   function generateTask() {
@@ -270,6 +273,8 @@ function TaskBehaviours() {
         span5: document.createElement("span"),
         li2: document.createElement("li"),
       };
+      taskElementsAdd.li1.style.backgroundColor = element.priority;
+
       taskElementsAdd.span1.textContent = "✗ ";
       taskElementsAdd.span1.classList.add("deleteTask");
       taskElementsAdd.span2.textContent = "✔ ";
@@ -316,9 +321,9 @@ function TaskBehaviours() {
     document.querySelectorAll("#checkTask").forEach((element) => {
       element.addEventListener("click", () => {
         if (element.nextElementSibling.className !== "") {
-          element.nextElementSibling.classList.remove("done")
+          element.nextElementSibling.classList.remove("done");
         } else {
-          element.nextElementSibling.classList.add("done")
+          element.nextElementSibling.classList.add("done");
         }
       });
     });
@@ -341,9 +346,19 @@ function TaskBehaviours() {
     });
   }
 
+  function deleteTask() {
+    document.querySelectorAll(".deleteTask").forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        taskList.splice(index, 1);
+        generateTask();
+        document.querySelectorAll(".deleteTask").forEach((element) => {
+          element.style.display = "inline-block";
+        });
+        deleteTask();
+        toggleDescriptionShow();
+      });
+    });
+  }
+
   return { poriorityCheck, addTask };
 }
-
-const mainTasks = TaskBehaviours();
-mainTasks.poriorityCheck();
-mainTasks.addTask();
