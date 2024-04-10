@@ -1,5 +1,10 @@
 import { TaskBehaviours } from "./task.js";
 import { showList, showTasks } from "./show.js";
+import {
+  toggleListDescriptionShow,
+  toggleTaskDescriptionShow,
+} from "./domDescription.js";
+import { toggleDeleteList, toggleDeleteTask, deleteList } from "./domDelete.js";
 
 const task = TaskBehaviours();
 
@@ -41,6 +46,9 @@ function ListBehaviours() {
       listCollection.push(newList());
       showList(listCollection);
       pickUpList();
+      toggleListDescriptionShow();
+      toggleDeleteList();
+      deleteList(listCollection)
     });
   }
 
@@ -55,6 +63,8 @@ function ListBehaviours() {
         listCollection[listIndex].taskCollection.push(task.newTask());
         showTasks(listCollection[listIndex].taskCollection);
       }
+      toggleTaskDescriptionShow();
+      toggleDeleteTask();
     });
   }
 
