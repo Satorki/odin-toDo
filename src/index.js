@@ -1,3 +1,4 @@
+import "./style.css";
 import { Modal } from "./modal.js";
 import { ListBehaviours } from "./list.js";
 
