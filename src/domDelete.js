@@ -1,5 +1,3 @@
-import { showList, showTasks } from "./show.js";
-
 function toggleDeleteList() {
   let temp = 0;
   const toggleDeletListsBtn = document.querySelector("#deleteListBtn");
@@ -19,24 +17,7 @@ function toggleDeleteList() {
   });
 }
 
-function deleteList(list) {
-  const deleteListBtn = document.querySelectorAll(".deleteList");
-  deleteListBtn.forEach((deleteButton, index) => {
-    deleteButton.addEventListener("click", () => {
-      list.splice(index, 1);
-      console.table(list);
-      showList(list);
-      toggleDeleteList();
-      deleteList(list);
-      console.log(list[index]);
-      if (list[index]) {
-        showTasks(list[index]);
-      } else {
-        showTasks(list[index])
-      }
-    });
-  });
-}
+
 
 function toggleDeleteTask() {
   let temp = 0;
@@ -55,4 +36,4 @@ function toggleDeleteTask() {
   });
 }
 
-export { toggleDeleteList, deleteList, toggleDeleteTask };
+export { toggleDeleteList, toggleDeleteTask };

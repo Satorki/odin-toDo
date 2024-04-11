@@ -36,7 +36,8 @@ function showTasks(list) {
     taskField: document.querySelector("#taskField ul"),
   };
   outputs.taskField.textContent = "";
-  list.forEach((element) => {
+  if (Array.isArray(list)) {
+    list.forEach((element) => {
     const taskElementsAdd = {
       li1: document.createElement("li"),
       div1: document.createElement("div"),
@@ -77,6 +78,7 @@ function showTasks(list) {
     taskElementsAdd.div2.appendChild(taskElementsAdd.span5);
     outputs.taskField.appendChild(taskElementsAdd.li2);
   });
+}
 }
 
 export { showList, showTasks };

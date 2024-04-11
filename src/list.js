@@ -4,13 +4,54 @@ import {
   toggleListDescriptionShow,
   toggleTaskDescriptionShow,
 } from "./domDescription.js";
-import { toggleDeleteList, toggleDeleteTask, deleteList } from "./domDelete.js";
+import { toggleDeleteList, toggleDeleteTask } from "./domDelete.js";
 
 const task = TaskBehaviours();
+task.poriorityCheck();
 
 function ListBehaviours() {
-  const listCollection = [];
+  let listCollection = [];
   let listId;
+
+  const test = JSON.parse(localStorage.getItem("lists")) || [];
+  listCollection = test;
+  showList(listCollection);
+  pickUpList();
+  toggleDeleteList();
+  toggleDeleteTask();
+  deleteList();
+  deleteTask();
+  toggleTaskDescriptionShow();
+  toggleListDescriptionShow();
+
+  function deleteList() {
+    const deleteListBtn = document.querySelectorAll(".deleteList");
+    deleteListBtn.forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        listCollection.splice(index, 1);
+        showList(listCollection);
+        toggleDeleteList();
+        deleteList();
+        showTasks(listCollection[index]);
+        pickUpList();
+        saveToLocalStorage();
+      });
+    });
+  }
+
+  function deleteTask() {
+    const deleteTaskBtn = document.querySelectorAll(".deleteTask");
+    deleteTaskBtn.forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        listCollection[pickUpList()].taskCollection.splice(index, 1);
+        showTasks(listCollection[pickUpList()].taskCollection);
+        toggleDeleteTask();
+        deleteTask();
+        pickUpList();
+        saveToLocalStorage();
+      });
+    });
+  }
 
   function pickUpList() {
     const listTitleMain = document.querySelector("#listTitleMain");
@@ -22,6 +63,10 @@ function ListBehaviours() {
         titleH2.textContent = element.textContent;
         listId = index;
         showTasks(listCollection[index].taskCollection);
+        deleteTask();
+        deleteList();
+        toggleTaskDescriptionShow();
+        toggleListDescriptionShow();
       });
     });
     return listId;
@@ -48,7 +93,8 @@ function ListBehaviours() {
       pickUpList();
       toggleListDescriptionShow();
       toggleDeleteList();
-      deleteList(listCollection)
+      deleteList();
+      saveToLocalStorage();
     });
   }
 
@@ -65,7 +111,15 @@ function ListBehaviours() {
       }
       toggleTaskDescriptionShow();
       toggleDeleteTask();
+      task.markDoneTask();
+      deleteTask();
+
+      saveToLocalStorage();
     });
+  }
+
+  function saveToLocalStorage() {
+    localStorage.setItem("lists", JSON.stringify(listCollection));
   }
 
   return { addList, addTaskToList };
