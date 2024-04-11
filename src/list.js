@@ -19,9 +19,9 @@ function ListBehaviours() {
   pickUpList();
   toggleDeleteList();
   toggleDeleteTask();
-  deleteList();
   deleteTask();
   toggleTaskDescriptionShow();
+  deleteList();
   toggleListDescriptionShow();
 
   function deleteList() {
@@ -30,8 +30,8 @@ function ListBehaviours() {
       deleteButton.addEventListener("click", () => {
         listCollection.splice(index, 1);
         showList(listCollection);
-        toggleDeleteList();
         deleteList();
+        toggleDeleteList();
         showTasks(listCollection[index]);
         pickUpList();
         saveToLocalStorage();
@@ -64,7 +64,6 @@ function ListBehaviours() {
         listId = index;
         showTasks(listCollection[index].taskCollection);
         deleteTask();
-        deleteList();
         toggleTaskDescriptionShow();
         toggleListDescriptionShow();
       });
@@ -93,7 +92,6 @@ function ListBehaviours() {
       pickUpList();
       toggleListDescriptionShow();
       toggleDeleteList();
-      deleteList();
       saveToLocalStorage();
     });
   }
@@ -113,7 +111,6 @@ function ListBehaviours() {
       toggleDeleteTask();
       task.markDoneTask();
       deleteTask();
-
       saveToLocalStorage();
     });
   }
